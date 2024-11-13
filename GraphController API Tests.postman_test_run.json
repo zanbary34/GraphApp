@@ -1,0 +1,110 @@
+{
+	"id": "d1a0a6ac-3f2d-4aee-84a0-617c0382119a",
+	"name": "GraphController API Tests",
+	"timestamp": "2024-11-12T15:25:45.584Z",
+	"collection_id": "29429890-aa0f437e-4898-4d7b-b88b-e68c5182a9e7",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-11-12T15:25:44.946Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "8b0a6c98-ede9-491a-86e9-96a527d868a1",
+			"name": "Create Node with Dynamic Edges",
+			"url": "http://localhost:5199/api/graph/create",
+			"time": 18,
+			"responseCode": {
+				"code": 415,
+				"name": "Unsupported Media Type"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f7590d66-9610-4283-b052-ffc9dd4d65ed",
+			"name": "Update Node with New Dynamic Edges",
+			"url": "http://localhost:5199/api/graph/update",
+			"time": 3,
+			"responseCode": {
+				"code": 415,
+				"name": "Unsupported Media Type"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5d47e918-b504-46d6-9155-aaab5f3fb900",
+			"name": "Get Node by Name",
+			"url": "http://localhost:5199/api/graph/Node_1731425145220",
+			"time": 110,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				110
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "77167b54-99d8-43cd-bf0b-828eae392812",
+			"name": "Delete Node",
+			"url": "http://localhost:5199/api/graph/delete",
+			"time": 2,
+			"responseCode": {
+				"code": 415,
+				"name": "Unsupported Media Type"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 133,
+	"collection": {
+		"requests": [
+			{
+				"id": "8b0a6c98-ede9-491a-86e9-96a527d868a1",
+				"method": "POST"
+			},
+			{
+				"id": "f7590d66-9610-4283-b052-ffc9dd4d65ed",
+				"method": "PUT"
+			},
+			{
+				"id": "5d47e918-b504-46d6-9155-aaab5f3fb900",
+				"method": "GET"
+			},
+			{
+				"id": "77167b54-99d8-43cd-bf0b-828eae392812",
+				"method": "DELETE"
+			}
+		]
+	}
+}

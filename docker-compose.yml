@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  service-a:
+    build:
+      context: ./ServiceA
+      dockerfile: Dockerfile
+    container_name: service_a
+    environment:
+      JwtSettings__SecretKey: "TA9111111111111111111111111111111"
+      ASPNETCORE_ENVIRONMENT:  "Staging"    
+    ports:
+      - "5199:8080"
+    depends_on:
+      - db
+
+  service-b:
+    build:
+      context: ./ServiceB
+      dockerfile: Dockerfile
+    container_name: service_b
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Database=graphdb;Username=graph_user;Password=password"
+      JwtSettings__SecretKey: "TA9111111111111111111111111111111"
+      ASPNETCORE_ENVIRONMENT: "Staging"
+    ports:
+      - "5191:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: graph_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: graphdb
+    ports:
+      - "5433:5432"  # Corrected to map PostgreSQL's internal port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U graph_user -d graphdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

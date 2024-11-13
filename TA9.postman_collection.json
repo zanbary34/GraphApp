@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "db9f26aa-5f29-4b23-807f-0347f90cc0e8",
+		"name": "TA9",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29429890"
+	},
+	"item": [
+		{
+			"name": "CreateNode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"TestNode\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5199/api/graph/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5199",
+					"path": [
+						"api",
+						"graph",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateNode",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"TestNode\",\r\n  \"newName\": \"UpdatedNode\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5199/api/graph/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5199",
+					"path": [
+						"api",
+						"graph",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetNode",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
