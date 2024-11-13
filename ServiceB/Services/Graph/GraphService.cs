@@ -32,9 +32,17 @@ public class GraphService : IGraphService
 
             switch (graphMessage.Operation)
             {
-                case "get_node":
+                case "get_node_with_descendants":
                     var node = await GetNodeWithDescendants(graphMessage.Data.Name);
                     return node != null ? JsonSerializer.Serialize(node) : GetErrorMessage("Node not found");
+
+                case "get_nodes":
+                    var nodes = await GetAllNodesAsync();
+                    return nodes.Count > 0 ? JsonSerializer.Serialize(nodes) : GetErrorMessage("Nodes not found");
+
+                case "get_edges":
+                    var edges = await GetAllEdgesAsync();
+                    return edges.Count > 0 ? JsonSerializer.Serialize(edges) : GetErrorMessage("Edges not found");
 
                 case "create_node":
                     await CreateNodeAsync(graphMessage.Data);
@@ -217,5 +225,21 @@ public class GraphService : IGraphService
             var connectedNodeId = edge.SourceNodeId == nodeId ? edge.TargetNodeId : edge.SourceNodeId;
             await TraverseGraph(connectedNodeId, visitedNodes, visitedEdges, result);
         }
+    }
+
+    public async Task<List<NodeDto>> GetAllNodesAsync()
+    {
+        var nodes = await _context.Nodes
+            .Select(n => new NodeDto { Id = n.Id, Name = n.Name })
+            .ToListAsync();
+        return nodes;
+    }
+
+    public async Task<List<EdgeDto>> GetAllEdgesAsync()
+    {
+        var edges = await _context.Edges
+            .Select(e => new EdgeDto { SourceNodeId = e.SourceNodeId, TargetNodeId = e.TargetNodeId })
+            .ToListAsync();
+        return edges;
     }
 }

@@ -34,12 +34,24 @@ public class GraphController : ControllerBase
     }
 
     [HttpGet("{name}")]
-    public async Task<IActionResult> GetNode(string name)
+    public async Task<IActionResult> GetNodeTree(string name)
     {
-        return await ProcessRequestAsync("get_node", new { Name = name });
+        return await ProcessRequestAsync("get_node_with_descendants", new { Name = name });
     }
 
-    private async Task<IActionResult> ProcessRequestAsync(string operation, object data)
+    [HttpGet("nodes")]
+    public async Task<IActionResult> GetNodes()
+    {
+        return await ProcessRequestAsync("get_nodes");
+    }
+
+    [HttpGet("edges")]
+    public async Task<IActionResult> GetEdges()
+    {
+        return await ProcessRequestAsync("get_edges");
+    }
+
+    private async Task<IActionResult> ProcessRequestAsync(string operation, object? data = null)
     {
         var message = new GraphRequest
         {
@@ -51,16 +63,27 @@ public class GraphController : ControllerBase
         return HandleResponse(response ?? string.Empty);
     }
 
-
     private IActionResult HandleResponse(string response)
     {
         var responseJson = JsonNode.Parse(response);
-        if (responseJson?["status"]?.ToString() == "error")
+
+        if (responseJson is JsonObject jsonObject)
         {
-            var errorMessage = responseJson["message"]?.ToString() ?? "An error occurred";
-            return BadRequest(new { status = "error", message = errorMessage });
+            if (jsonObject["status"]?.ToString() == "error")
+            {
+                var errorMessage = jsonObject["message"]?.ToString() ?? "An error occurred";
+                return BadRequest(new { status = "error", message = errorMessage });
+            }
+
+            return Ok(jsonObject);
         }
 
-        return Ok(responseJson);
+        if (responseJson is JsonArray jsonArray)
+        {
+            return Ok(jsonArray);
+        }
+
+        return Ok(response);
     }
+
 }
