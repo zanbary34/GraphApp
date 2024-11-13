@@ -91,7 +91,7 @@ process is safe from race conditions.
 
 **Setup Instructions**
 
-1.  Clone the repository or Unzip the file.
+1.  Clone the repository.
 
 2.  Run docker-compose up \--build to start all the containers (Service
     A, Service B, PostgreSQL).
