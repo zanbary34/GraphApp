@@ -75,10 +75,52 @@
 			"response": []
 		},
 		{
-			"name": "GetNode",
+			"name": "GetNodeTree",
 			"request": {
 				"method": "GET",
 				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetEdges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5199/api/graph/edges",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5199",
+					"path": [
+						"api",
+						"graph",
+						"edges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetNodes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5199/api/graph/nodes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5199",
+					"path": [
+						"api",
+						"graph",
+						"nodes"
+					]
+				}
 			},
 			"response": []
 		}
