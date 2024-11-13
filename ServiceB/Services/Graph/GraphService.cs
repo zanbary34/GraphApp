@@ -121,7 +121,6 @@ public class GraphService : IGraphService
                     throw new InvalidOperationException("A node can have a maximum of two edges.");
                 }
 
-                // Remove existing edges for this node
                 var existingEdges = _context.Edges.Where(e => e.SourceNodeId == node.Id || e.TargetNodeId == node.Id);
                 _context.Edges.RemoveRange(existingEdges);
 
@@ -180,7 +179,7 @@ public class GraphService : IGraphService
 
         var result = new DescendantsResponseDto();
         var visitedNodes = new HashSet<int>();
-        var visitedEdges = new HashSet<string>(); // Shared across recursive calls
+        var visitedEdges = new HashSet<string>(); 
         await TraverseGraph(node.Id, visitedNodes, visitedEdges, result);
 
         return result;
@@ -206,7 +205,6 @@ public class GraphService : IGraphService
             var sourceId = edge.SourceNodeId;
             var targetId = edge.TargetNodeId;
 
-            // Create a unique key for the edge to avoid duplicates
             var edgeKey = sourceId < targetId
                 ? $"{sourceId}-{targetId}"
                 : $"{targetId}-{sourceId}";

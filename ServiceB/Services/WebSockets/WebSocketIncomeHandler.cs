@@ -18,7 +18,6 @@ namespace ServiceB.Services.WebSockets
 
                 if (receiveResult.MessageType == WebSocketMessageType.Text)
                 {
-                    // Process and send a response message
                     var response = await _context.UpdateFromMessageAsync(Encoding.UTF8.GetString(buffer, 0, receiveResult.Count));
                     if (response != null)
                     {
